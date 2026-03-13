@@ -71,13 +71,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           
-      - name: Wait for EKS cluster to be ACTIVE
-        run: aws eks wait cluster-active --region ${{ env.aws_region }} --name ${{ env.eks_cluster }}
-
       - name: Get Kube config
         id: getconfig
         if: steps.apple.outcome == 'success'
-        run: aws eks update-kubeconfig --region ${{ env.aws_region }} --name vprofile-eks
+        run: aws eks update-kubeconfig --region ${{ env.aws_region }} --name ${{ env.eks_cluster }}
       
       - name: Install ingress controller
         if: steps.getconfig.outcome == 'success' && steps.getconfig.outcome == 'success'
