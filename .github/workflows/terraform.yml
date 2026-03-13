@@ -17,7 +17,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   #S3 bucket for terraform state
-  TF_STATE_BUCKET: ${{ secrets.TF_STATE_BUCKET }}
+  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE }}
   aws_region: us-east-1
   eks_cluster: vprofile-eks
 
@@ -40,7 +40,7 @@ jobs:
 
       - name: Terraform Init
         id: terraform_init
-        run: terraform init -backend-config="bucket=$TF_STATE_BUCKET"
+        run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
 
       - name: Terraform format
         id: terraform_fmt
